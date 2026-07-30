@@ -1,0 +1,27 @@
+import subprocess
+import sys
+
+
+def run_program(input_text):
+    result = subprocess.run(
+        [sys.executable, "main.py"],
+        input=input_text,
+        text=True,
+        capture_output=True
+    )
+    return result.stdout
+
+
+def test_name_alice():
+    output = run_program("Alice\n")
+    assert "Hello, Alice!" in output
+
+
+def test_name_john():
+    output = run_program("John\n")
+    assert "Hello, John!" in output
+
+
+def test_welcome():
+    output = run_program("David\n")
+    assert "Welcome to Python programming." in output
